@@ -100,16 +100,21 @@ minikube start
 ```
 cd deployment
 ```
-
-`kubectl apply -f postgres-deployment.yaml`
-
-`kubectl apply -f result-deployment.yaml`
-
-`kubectl apply -f worker-deployment.yaml`
-
-`kubectl apply -f redis-deployment.yaml`
-
-`kubectl apply -f voting-app-deployment.yaml`
+```
+kubectl apply -f postgres-deployment.yaml
+```
+```
+kubectl apply -f result-deployment.yaml
+```
+```
+kubectl apply -f worker-deployment.yaml
+```
+```
+kubectl apply -f redis-deployment.yaml
+```
+```
+kubectl apply -f voting-app-deployment.yaml
+```
 
 - Same way deploy the **service**
 
@@ -117,14 +122,15 @@ change directory to service
 ```
 cd ../service
 ```
+```
+kubectl apply -f postgres-service.yaml
 
-`kubectl apply -f postgres-service.yaml`
+kubectl apply -f redis-service.yaml
 
-`kubectl apply -f redis-service.yaml`
+kubectl apply -f result-app-service.yaml
 
-`kubectl apply -f result-app-service.yaml`
-
-`kubectl apply -f voting-app-service.yaml`
+kubectl apply -f voting-app-service.yaml
+```
 
 5. Check the deployment and Service status. Debug the errors like, `CrashLoopBackOff ` or `Imagepullbackoff` error.
 ```
