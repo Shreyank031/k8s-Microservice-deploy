@@ -12,6 +12,13 @@ The application follows a microservices architecture and consists of the followi
 4. **Worker**: A .NET service that consumes votes from Redis and persists them to PostgreSQL.
 5. **Result**: A Node.js application that fetches and displays the voting results from PostgreSQL.
 
+## Demo
+
+
+![micro-service](https://github.com/Shreyank031/k8s-Microservice-deploy/assets/115367978/1382e169-aab1-42fb-85d2-e0a0b4c6aae2)
+
+
+
 ## Microservices
 
 The application is designed as a collection of microservices, each responsible for a specific task. This architecture promotes scalability, resilience, and flexibility, as each microservice can be developed, deployed, and scaled independently.
