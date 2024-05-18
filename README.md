@@ -29,7 +29,7 @@ The microservices are deployed on a Kubernetes cluster using Deployment and Serv
 The Deployment and Service manifests for each microservice are located in the `k8s-Microservice-Deploy/deployments/` and `k8s-Microservice-Deploy/services/` directories, respectively.
 
 
->> I have also included the pods for all five componenets, in case you want to test it, understand before going to deployemnt.
+> I have also included the pods for all five componenets, in case you want to test it, understand before going to deployemnt.
 
 
 ## Docker Images
@@ -56,7 +56,7 @@ spec:
     spec:
       containers:
       - name: voting-app
-        image: kodekloud/examplevotingapp_vote:v1 #Image will pulled form dockerhub
+        image: kodekloud/examplevotingapp_vote:v1 #Image will be pulled form dockerhub registery
         ports:
         - containerPort: 80
   replicas: 1
@@ -69,5 +69,87 @@ spec:
 ## Prerequisites
 
 - Docker
-- Minikube (or any other Kubernetes cluster)
+- Minikube
 - kubectl (Kubernetes command-line tool)
+
+## Getting Started
+
+1. **Clone the repository**:
+
+```bash
+git clone https://github.com/Shreyank031/k8s-Microservice-Deploy.git
+```
+
+2. **Change dicrectory**:
+```
+cd k8s-Microservice-Deploy
+```
+
+3. **Start minikube**:
+```bash
+minikube start
+```
+   - check the status of minikube.
+  ```
+  minikube status.
+  ```
+
+4. Deploy the Service as well as the Deployment manifest
+> make sure you don't have any pods, deployment and service running. Not manditory, but helpful.
+
+```
+cd deployment
+```
+
+`kubectl apply -f postgres-deployment.yaml`
+
+`kubectl apply -f result-deployment.yaml`
+
+`kubectl apply -f worker-deployment.yaml`
+
+`kubectl apply -f redis-deployment.yaml`
+
+`kubectl apply -f voting-app-deployment.yaml`
+
+- Same way deploy the **service**
+
+change directory to service
+```
+cd ../service
+```
+
+`kubectl apply -f postgres-service.yaml`
+
+`kubectl apply -f redis-service.yaml`
+
+`kubectl apply -f result-app-service.yaml`
+
+`kubectl apply -f voting-app-service.yaml`
+
+5. Check the deployment and Service status. Debug the errors like, `CrashLoopBackOff ` or `Imagepullbackoff` error.
+```
+kubectl get deploy,svc -o wide
+kubectl get pods -o wide
+```
+
+- By default, the replica is set to 1. If you want to scale the application, you can use scale command.
+
+Example: 
+
+```
+kubectl scale --replica=3 deployment voting-app-deployment
+```
+
+**The above command scales the **voting-app-deployment** to 3 copies**
+
+6. Access services running inside the Minikube cluster from outside the cluster, typically from your local machine or browser:
+```
+minikube service voting-service
+minikube service result-service
+```
+
+After executing the above commands, by default you will be directed to the browser. Now you can access both the voting and result application. **Congratulations!**
+
+> Make sure the type is set to `NodePort` in 2 services, namely `voting-service` and `result-service`. As they help to expose k8s service outside the cluster.
+
+
